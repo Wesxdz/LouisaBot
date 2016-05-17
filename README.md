@@ -1,16 +1,24 @@
 # LouisaBot
 A helpful chatbot with NLP and speech synthesis. Knowledge and commands can be taught and resemble a conversation.
-Louisa is programed to work primarily on Mac OS X, I will eventually port to Windows.
+LouisaBot is programed to work primarily on Mac OS X.
 
 ![Lou Is A Bot](http://s32.postimg.org/v0ui84qj9/louisa.png)
 
-The project is still in early stages, <b>it's mainly an experiment in expressive and animated voice sythesis.<b>
+The project is still in early stages of development, <b>it's mainly an experiment in [expressive](http://web1.cs.columbia.edu/~julia/courses/old/cs6998-02/schroeder01.pdf) and animated voice sythesis.</b>
 
-https://text-to-speech-demo.mybluemix.net/
-http://web1.cs.columbia.edu/~julia/courses/old/cs6998-02/schroeder01.pdf
+<h2>Current Features</h2>
 
+* [Speech Recogntion](https://pypi.python.org/pypi/SpeechRecognition/2.1.3) Uses Google API for now, may switch to SphinxCMU
+* Basic Searching
+* Shell Commands
+* [NLTK](http://www.nltk.org/book/ch05.html) POS Tagging
 
-https://pypi.python.org/pypi/SpeechRecognition/2.1.3
-http://opencv.org/documentation.html
-http://www.nltk.org/book/ch05.html
+<h2>To Do</h2>
+* Fuction-Based Actions
+* Voice Synthesis Library
+* Download Manager
+* [OpenCV](http://opencv.org/documentation.html) Gesture and Facial Recognition
+* Simultaneous Input Types
+* GUI
+* Animated Facial Expressions
 
