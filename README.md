@@ -2,7 +2,7 @@
 A helpful chatbot with NLP and speech synthesis. Knowledge and commands can be taught and resemble a conversation.
 Louisa is programed to work primarily on Mac OS X, I will eventually port to Windows.
 
-![Lou Is A Bot](http://s32.postimg.org/o5w9vg4lx/five2.png)
+![Lou Is A Bot](http://s32.postimg.org/v0ui84qj9/louisa.png)
 
 The project is still in early stages, <b>it's mainly an experiment in expressive and animated voice sythesis.<b>
 
