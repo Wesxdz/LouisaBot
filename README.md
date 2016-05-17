@@ -8,4 +8,6 @@ http://web1.cs.columbia.edu/~julia/courses/old/cs6998-02/schroeder01.pdf
 
 
 https://pypi.python.org/pypi/SpeechRecognition/2.1.3
+http://opencv.org/documentation.html
+http://www.nltk.org/book/ch05.html
 
