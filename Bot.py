@@ -1,6 +1,6 @@
 """
 LouisaBot, written by a lonely young lad.
-Written in Python 3.5
+Coded in Python 3.5
 Required Python modules include: OS, SpeechRecognition, PyAudio, PortAudio, Webbrowser, and NLTK
 
 What does this action signify?
@@ -121,3 +121,4 @@ with sr.Microphone() as source:
             print("Google Speech Recognition could not understand audio")
         except sr.RequestError as e:
             print("Could not request results from Google Speech Recognition service; {0}".format(e))
+            
