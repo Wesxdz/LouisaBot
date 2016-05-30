@@ -1,5 +1,6 @@
 """
 LouisaBot, written by a lonely young lad.
+Written in Python 3.5
 Required Python modules include: OS, SpeechRecognition, PyAudio, PortAudio, Webbrowser, and NLTK
 
 What does this action signify?
@@ -10,79 +11,112 @@ import speech_recognition as sr
 import os
 import webbrowser
 import nltk
-
-# Setup Keywords
-browse = ['google', 'search for', 'search', 'look up', 'what is']
-name = ['call me', 'my name is']
+from pws import Bing
+import pafy
+import subprocess
 
 # Setup Functions
 
 
-def search(statement):
-    for i in browse:
-        if i in statement:
-            lib = statement[len(i):].replace(' ', '+')
-            url = "https://www.google.com/#q="
-            webbrowser.open_new(url + str(lib))
-            os.system("say Looking up " + statement[len(i):])
-            return True
+def parse(something):
+    global key
+    return something[len(key):]
 
+
+def say(something):
+    os.system('say -v "Victoria" ' + something)
+
+
+def install():
+    module = input('PIP Module: ')
+    os.system("python3.5 -m pip install " + module)
+
+
+def find():
+    global statement, key
+    mysearch = statement[len(key):]
+    query = Bing.search(query=mysearch, num=2)
+    results = (query.get('results')[0])
+    mylink = results.get('link')
+    webbrowser.open(mylink)
+    Self.this = mylink
+
+
+def download():
+    if Self.this != '':
+        url = input('Enter URL ')
+    else:
+        url = Self.this
+    video = pafy.new(url)
+    best = video.getbest(preftype='mp4')
+    # bestaudio = video.getbestaudio(preftype='m4a')
+    filetype = '.mp4'
+    filepath = "/Users/Wesxdz/PycharmProjects/LouisaBot/Media/"
+    best.download(filepath=filepath)
+    subprocess.call(['open', filepath + video.title + filetype])
+
+
+def play():
+    songs = os.listdir('Media')
+    print(songs)
+    for s in songs:
+        for i in words:
+            if i in s.lower():
+                print(i + s)
+                subprocess.call(['open', "/Users/Wesxdz/PycharmProjects/LouisaBot/Media/" + s])
+                break
+
+
+def search():
+    global statement, key
+    lib = statement[len(key):].replace(' ', '+')
+    url = "https://www.google.com/#q="
+    webbrowser.open_new(url + str(lib))
+    say("Looking up " + statement[len(key):])
+
+
+def end():
+    global power
+    power = False
+    say('Goodbye')
+
+# Setup Keywords
+power = True
+statement = ''
+functions = {search: ['google', 'search for', 'search', 'look up', 'what is'], end: ['quit', 'stop', 'end'],
+             find: ['find'], install: ['install'], download: ['download this']}
+
+
+class Self:
+    name = 'LouisaBot'
+    this = ''
+
+print(Self.name)
 # obtain audio from the microphone
-print('Opening Ears...')
 r = sr.Recognizer()
 with sr.Microphone() as source:
-    r.adjust_for_ambient_noise(source)
-    # r.energy_threshold += 100
+    r.adjust_for_ambient_noise(source, duration=1)
     r.pause_threshold = .3
     r.non_speaking_duration = .2
-    while True:
-        print('Listening...')
+
+    while power:
         audio = r.listen(source)
         # recognize speech using Google Speech Recognition)
         try:
-            said = r.recognize_google(audio)
+            statement = r.recognize_google(audio).lower()
             # for testing purposes, we're just using the default API key
             # to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
             # instead of `r.recognize_google(audio)`
-            print("I think you said '" + said + "'")
-            words = nltk.word_tokenize(said.lower())
-            # nltk.pos_tag(nltk.word_tokenize(said)))
-            if 'quit' in words:
-                os.system("say 'Fare thee well.'")
-                break
-            elif 'install' in words:
-                mod = input('PIP Module: ')
-                os.system("python3.5 -m pip install " + mod)
-            elif 'genghis' in words:
-                link = 'https://www.youtube.com/watch?v=P_SlAzsXa7E'
-                webbrowser.open(link)
-            elif search(said):
-                print('It worked')
-            elif 'mute' in words:
-                os.system("osascript -e 'set volume output muted true'")
-                r.adjust_for_ambient_noise(source)
-            elif 'unmute' in words:
-                os.system("osascript -e 'set volume output muted false'")
-                r.adjust_for_ambient_noise(source)
-            elif 'volume' in words:
-                if 'increase' in words:
-                    volume = os.system("osascript -e 'output volume of (get volume settings)'")
-                    print(volume)
-                else:
-                    for w in words:
-                        if w.isdigit():
-                            os.system("osascript -e 'set volume output volume " + w + "'")
-                            break
-            elif 'hello' in said:
-                print("Greetings")
-                os.system("say 'Greetings'")
-            elif 'thank you' in said:
-                os.system("say You are welcome.")
-            elif 'simon says ' in said:
-                os.system("say " + said[11:])
-            elif 'who are you' in said:
-                print("I am programmed to be what you say I am.")
-                os.system("say 'I am programmed to be what you say I am.'")
+            print(statement)
+            words = nltk.word_tokenize(statement.lower())
+            # nltk.pos_tag(nltk.word_tokenize(statement)))
+            for keywords in functions:
+                for k in functions[keywords]:
+                    if k in statement:
+                        key = k
+                        keywords()
+                        break
+
         except sr.UnknownValueError:
             print("Google Speech Recognition could not understand audio")
         except sr.RequestError as e:
