@@ -9,14 +9,15 @@ The project is still in early stages of development, <b>it's mainly an experimen
 <h2>Current Features</h2>
 
 * [Speech Recogntion](https://pypi.python.org/pypi/SpeechRecognition/2.1.3) Uses Google API for now, may switch to SphinxCMU
-* Basic Searching
+* Web Searching
 * Shell Commands
 * [NLTK](http://www.nltk.org/book/ch05.html) POS Tagging
+* Fuction-Based Actions
+* Download Youtube Videos
+* Media Manager
 
 <h2>To Do</h2>
-* Fuction-Based Actions
 * Voice Synthesis Library
-* Download Manager
 * [OpenCV](http://opencv.org/documentation.html) Gesture and Facial Recognition
 * Simultaneous Input Types
 * GUI
