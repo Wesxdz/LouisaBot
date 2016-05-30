@@ -22,4 +22,11 @@ The project is still in early stages of development, <b>it's mainly an experimen
 * Simultaneous Input Types
 * GUI
 * Animated Facial Expressions
+* Cross platform support
+
+
+<h2>Examples</h2>
+
+Say 'find Youtube' and whatever video you want
+Then say 'download this'
 
