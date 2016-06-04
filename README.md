@@ -17,11 +17,10 @@ The project is still in early stages of development, <b>it's mainly an experimen
 * Media Manager
 
 <h2>To Do</h2>
-* Voice Synthesis Library
+* Speech Production Library
 * [OpenCV](http://opencv.org/documentation.html) Gesture and Facial Recognition
 * Simultaneous Input Types
 * GUI
-* Animated Facial Expressions
 * Cross platform support
 
 
